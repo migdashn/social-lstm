@@ -198,7 +198,7 @@ def train(args):
             loss_batch = 0
             
             #if we are in a new dataset, zero the counter of batch
-            if dataset_pointer_ins_grid is not dataloader.dataset_pointer and epoch is not 0:
+            if dataset_pointer_ins_grid is not dataloader.dataset_pointer and epoch != 0:
                 num_batch = 0
                 dataset_pointer_ins_grid = dataloader.dataset_pointer
 
@@ -219,7 +219,7 @@ def train(args):
 
                 #grid mask calculation and storage depending on grid parameter
                 if(args.grid):
-                    if(epoch is 0):
+                    if(epoch == 0):
                         grid_seq = getSequenceGridMask(x_seq, dataset_data, PedsList_seq,args.neighborhood_size, args.grid_size, args.use_cuda)
                         grids[dataloader.dataset_pointer].append(grid_seq)
                     else:
@@ -468,7 +468,7 @@ def train(args):
                 x, y, d , numPedsList, PedsList ,target_ids = dataloader.next_batch()
 
                 if dataset_pointer_ins is not dataloader.dataset_pointer:
-                    if dataloader.dataset_pointer is not 0:
+                    if dataloader.dataset_pointer != 0:
                         print('Finished prosessed file : ', dataloader.get_file_name(-1),' Avarage error : ', err_epoch/num_of_batch)
                         num_of_batch = 0
                         epoch_result.append(results)
